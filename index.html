@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--
+  DOCTYPE tells the browser: "this is an HTML5 document."
+  Always put this at the very top. Without it, browsers go into
+  "quirks mode" and things render unpredictably.
+-->
+
+<html lang="en">
+<!--
+  <html> is the root element — everything lives inside it.
+  lang="en" tells browsers and screen readers this page is in English.
+-->
+
+<head>
+  <!--
+    <head> is invisible to the reader. It's metadata — info ABOUT
+    the page: its title, fonts, styles, and other config.
+  -->
+
+  <meta charset="UTF-8">
+  <!-- UTF-8 means the page can display any character — accents, em dashes, etc. -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    This makes the page look right on phones.
+    Without it, mobile browsers zoom out and render a tiny desktop view.
+  -->
+
+  <title>Harrison's Blog</title>
+  <!-- This shows up in the browser tab and in Google search results. -->
+
+  <!--
+    FONTS — we're loading two from Google Fonts (free):
+    - "Playfair Display" for headings: classic, editorial, serif
+    - "Lora" for body text: elegant and readable at small sizes
+    You can swap these out at fonts.google.com — just replace the URL below.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+      Everything between <style> tags is CSS.
+      CSS controls how things LOOK — color, size, spacing, layout.
+      The pattern is always: selector { property: value; }
+    */
+
+    /* =====================
+       CSS VARIABLES
+       =====================
+       Think of these like named colors/values you define once
+       and reuse everywhere. Change the value here and it updates
+       across the whole page. Declared inside :root so they're global.
+    */
+    :root {
+      --bg:        #f5f0e8;   /* warm off-white background */
+      --ink:       #1a1714;   /* near-black for main text */
+      --muted:     #7a6f63;   /* softer color for dates, metadata */
+      --accent:    #8b3a2a;   /* deep red for links and highlights */
+      --rule:      #d4cdc4;   /* light line color for borders/dividers */
+      --max-width: 680px;     /* how wide the content column gets */
+    }
+
+    /* =====================
+       RESET & BASE STYLES
+       =====================
+       Browsers have their own default styles for everything.
+       We normalize them here so we start from a clean slate.
+    */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      /* box-sizing: border-box means padding doesn't ADD to element width.
+         Without this, a 200px wide box with 20px padding becomes 240px. Annoying. */
+    }
+
+    html {
+      font-size: 18px;
+      /* Setting font-size on html lets us use "rem" units elsewhere.
+         1rem = 18px, 1.5rem = 27px, etc. This makes scaling easy. */
+    }
+
+    body {
+      background-color: var(--bg);    /* uses our CSS variable */
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.75;              /* breathing room between lines */
+      padding: 2rem 1.5rem;           /* top/bottom: 2rem, left/right: 1.5rem */
+    }
+
+    /* =====================
+       LAYOUT
+       =====================
+       We center the content in a narrow column — classic blog layout.
+       This is easier to read than full-width text on a wide monitor.
+    */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;   /* auto left+right margins = centered */
+    }
+
+    /* =====================
+       HEADER
+       =====================
+    */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .site-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;   /* tighten letter spacing slightly — looks more editorial */
+    }
+
+    .site-name a {
+      color: inherit;         /* inherits the color from parent (--ink), not default blue */
+      text-decoration: none;  /* remove the underline */
+    }
+
+    .site-tagline {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;   /* makes lowercase text appear as CAPS */
+      margin-right: 1.5rem;
+    }
+
+    nav a:hover {
+      /* :hover is a "pseudo-class" — styles that only apply when
+         the user hovers their cursor over the element */
+      text-decoration: underline;
+    }
+
+    /* =====================
+       POST LIST
+       =====================
+       The main content: a list of posts on the homepage.
+    */
+    .post-list {
+      list-style: none;   /* removes the bullet points from <ul> */
+    }
+
+    .post-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .post-item:last-child {
+      /* :last-child targets only the final element in a group.
+         Here we remove the bottom border from the last post. */
+      border-bottom: none;
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .post-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-title a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .post-title a:hover {
+      color: var(--accent);
+    }
+
+    .post-excerpt {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================
+       FOOTER
+       =====================
+    */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!--
+    <body> is everything VISIBLE to the reader.
+    Think of it as the page itself.
+  -->
+
+  <div class="container">
+    <!--
+      <div> is a generic container — a box with no built-in meaning.
+      We use it to group things and apply layout styles.
+      The class="container" lets our CSS target it.
+    -->
+
+    <header>
+      <!--
+        <header> is a semantic element — it tells the browser and
+        screen readers "this is the header section." Same idea with
+        <nav>, <main>, <footer>, <article>. Use these over plain <div>s
+        when the meaning fits. Good for accessibility and SEO.
+      -->
+      <div class="site-name">
+        <a href="index.html">Harry</a>
+        <!--
+          <a href="..."> is a link. href is the destination.
+          index.html = this page. posts/post.html = a post page.
+          Links can also point to external sites: href="https://..."
+        -->
+      </div>
+      <p class="site-tagline">Observations, rants, musings, and no nothings .</p>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <!--
+        <main> wraps the primary content of the page.
+        There should only be one <main> per page.
+      -->
+
+      <ul class="post-list">
+        <!--
+          <ul> = unordered list (bullets by default, removed via CSS above).
+          Each <li> is a list item. Semantically correct for a list of posts.
+        -->
+
+        <li class="post-item">
+          <div class="post-date">May 1, 2026</div>
+          <h2 class="post-title">
+            <a href="posts/first-post.html">On Making Things for No One</a>
+          </h2>
+          <!--
+            Heading hierarchy matters: h1 is the biggest/most important,
+            h2 is a section heading, h3 a sub-section, etc.
+            Don't skip levels (h1 → h3) — it confuses screen readers.
+          -->
+          <p class="post-excerpt">
+            There's something freeing about building a thing that no one asked for.
+            No brief, no client, no deadline. Just the work and what it wants to become.
+          </p>
+          <a href="posts/first-post.html" class="read-more">Read →</a>
+        </li>
+
+        <li class="post-item">
+          <div class="post-date">April 22, 2026</div>
+          <h2 class="post-title">
+            <a href="posts/second-post.html">Notes on Directing Strangers</a>
+          </h2>
+          <p class="post-excerpt">
+            The hardest part of directing isn't the shot list or the lighting.
+            It's the first thirty seconds with someone you've never met.
+          </p>
+          <a href="posts/second-post.html" class="read-more">Read →</a>
+        </li>
+
+        <li class="post-item">
+          <div class="post-date">April 10, 2026</div>
+          <h2 class="post-title">
+            <a href="posts/third-post.html">The Grinder Problem</a>
+          </h2>
+          <p class="post-excerpt">
+            I spent two weeks trying to figure out why my espresso tasted different
+            on Tuesdays. The answer was both obvious and embarrassing.
+          </p>
+          <a href="posts/third-post.html" class="read-more">Read →</a>
+        </li>
+
+      </ul>
+    </main>
+
+    <footer>
+      <p>© 2026 Harrison Tucker · Built by hand</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
