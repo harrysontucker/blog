@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>On Making Things for No One — Harrison Tucker</title>
+  <!--
+    Good practice: put the post title FIRST, then the site name.
+    This helps people identify the tab at a glance, and it's better
+    for search engines too (they weight early words more heavily).
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+      Notice this CSS is almost identical to index.html.
+      In a real project, you'd put shared styles in a separate file —
+      style.css — and link to it from every page:
+        <link rel="stylesheet" href="../style.css">
+      That way you change styles in ONE place and they update everywhere.
+      For now, we're keeping it self-contained so each file is readable on its own.
+    */
+
+    :root {
+      --bg:        #f5f0e8;
+      --ink:       #1a1714;
+      --muted:     #7a6f63;
+      --accent:    #8b3a2a;
+      --rule:      #d4cdc4;
+      --max-width: 680px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 18px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.75;
+      padding: 2rem 1.5rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ---- HEADER ---- */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .site-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .site-name a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-tagline {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-right: 1.5rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* ---- POST HEADER ---- */
+    .post-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .post-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h1.post-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.4rem;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    /* ---- POST BODY ---- */
+    /*
+      We wrap the article content in <article class="post-body">.
+      The CSS below styles every element INSIDE that wrapper.
+      The > means "direct child", but here we use a space (descendant selector):
+      .post-body p targets any <p> anywhere inside .post-body.
+    */
+
+    .post-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .post-body p:first-child::first-letter {
+      /*
+        ::first-letter is a "pseudo-element" — it lets you style
+        the very first letter of a paragraph separately.
+        Classic typographic drop-cap effect.
+      */
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      float: left;          /* pulls the letter out of flow so text wraps around it */
+      line-height: 0.85;
+      margin-right: 0.1em;
+      margin-top: 0.1em;
+      color: var(--accent);
+    }
+
+    .post-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+    }
+
+    .post-body blockquote {
+      /*
+        <blockquote> is for quoting someone else.
+        We style it distinctively so it stands out from body text.
+      */
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .post-body em {
+      /* <em> = emphasis = italics. Semantic, not just visual. */
+      font-style: italic;
+    }
+
+    .post-body strong {
+      /* <strong> = important text = bold. */
+      font-weight: bold;
+    }
+
+    .post-body a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* ---- POST FOOTER ---- */
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="site-name">
+        <a href="../index.html">Harrison Tucker</a>
+        <!--
+          Note the "../" before index.html.
+          This file lives in /posts/, so to get to the homepage
+          we have to go UP one folder (..) before finding index.html.
+          File paths: "../" = up one level, "./" = current folder.
+        -->
+      </div>
+      <p class="site-tagline">Regurgitations.</p>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <article>
+        <!--
+          <article> is a semantic element for a self-contained piece of content —
+          something that would still make sense if you copy-pasted it elsewhere.
+          A blog post is the perfect use case.
+        -->
+
+        <div class="post-header">
+          <div class="post-meta">May 6, 2026</div>
+          <h1 class="post-title">Writing Things Down for No One</h1>
+        </div>
+
+        <div class="post-body">
+
+          <p>
+            I'm writing things down for no one to read. I'm taking them, putting them
+            out into the void, like a crumpled up note. My brain never stops thinking —
+            it's not glamorous, nor is it fun. It's like a machine gun with the trigger
+            being held down. It's overkill. It's good for me to collect these thoughts,
+            organize them, "publish" them and move on.
+          </p>
+
+          <p>
+            This isn't trying to be profound or anything. I don't really think we need
+            any more of that right now in 2026.
+          </p>
+
+          <p>
+            I know there are Substacks, and I might post some of these writings there,
+            but I've become very turned off by Substack and everyone wanting their writing
+            to be behind a paywall. First off — is what you're saying really that great
+            that I need to pay $5 a month to read it? I am a child of the Tumblr era
+            where people would write basically novellas of their thoughts for free.
+          </p>
+
+          <p>
+            In a society where everything is being so curated on specific platforms,
+            driven by an algorithm, with a fee always attached — I wanted to do the
+            complete opposite. I think I could just also be nostalgic for the era of
+            blogs, where we cared more about the writing, and less about the curation.
+          </p>
+
+          <p>
+            To even further hunker down on this, I am teaching myself how to code HTML
+            and CSS as I go down this journey. As someone who has pretty severe dyslexia,
+            it's been fun to say the least. Brace for impact.
+          </p>
+
+          <p>
+            That's it for post #1. I know you're just so captivated, and can't wait for
+            what else is in store.
+          </p>
+
+        </div>
+
+        <div class="post-footer">
+          <a href="../index.html" class="back-link">← Back to all posts</a>
+        </div>
+
+      </article>
+
+    </main>
+
+    <footer>
+      <p>© 2026 Harrison Tucker · Built by hand</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
